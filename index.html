@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Near Ex 3.0</title>
+    <style>
+        body {
+            font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-container { 
+            width: 100%;
+            max-width: 640px;
+        }
+
+        .form-card, .thank-you-card {
+            font-family: Georgia;
+            background-color: #ffffff;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+        }
+
+        .header-card {
+            border-top: 10px solid #FF6600; /* 7-Eleven Orange */
+            position: relative;
+        }
+
+        .header-card::after {
+            content: "";
+            display: block;
+            height: 4px;
+            background: linear-gradient(90deg, #008000 33%, #FF6600 33%, #FF6600 66%, #DA291C 66%);
+            margin-top: 16px;
+            border-radius: 2px;
+        }
+
+        h1 {
+            font-family: Georgia;
+            font-size: 25px;
+            font-weight: 500;
+            color: #008000; /* 7-Eleven Green */
+            margin: 0;
+        }
+
+        .question-title {
+            font-family: Georgia;
+            font-size: 14px;
+            font-weight: 500;
+            color: #202124;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        input[type="text"], input[type="number"]:focus, input[type="date"], select {
+            text-transform:uppercase;
+            font-family: Georgia;
+            width: 50%;
+            border: none;
+            border-bottom: 1px solid #70757a;
+            padding: 4px 0;
+            font-size: 14px;
+            color: #202124;
+            background: transparent;
+            outline: none;
+            transition: border-bottom 0.2s;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus, select:focus {
+            text-transform:uppercase;
+            border-bottom: 2px solid #FF6600;
+            padding-bottom: 3px;
+        }
+
+        input::placeholder {
+            color: #70757a;
+        }
+
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .submit-btn, .reset-btn {
+            font-family: Georgia;
+            background-color: #008000;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 24px;
+.           font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s;
+        }
+
+        .submit-btn {
+            background-color: #008000;
+        }
+
+        .submit-btn:hover, .reset-btn:hover {
+            background-color: #006600;
+        }
+
+        .clear-btn {
+            background: none;
+            border: none;
+            color: #DA291C; /* 7-Eleven Red */
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .clear-btn:hover {
+            text-decoration: underline;
+        }
+
+        .thank-you-card {
+            display: none;
+            border-top: 10px solid #008000;
+        }
+
+        .thank-you-card h2 {
+            font-size: 24px;
+            font-weight: 500;
+            color: #008000;
+            margin-top: 0;
+        }
+
+        .thank-you-card p {
+            font-size: 14px;
+            color: #202124;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+
+        <!-- Hidden Iframe to handle Google Forms backend submission smoothly without page redirect -->
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(isSubmitted) { showThankYou(); }"></iframe>
+
+        <!-- 
+          INSTRUCTIONS TO CONNECT GOOGLE FORM:
+          1. Replace the 'action' URL below with your actual Google Form URL (change '/viewform' to '/formResponse').
+          2. Replace the 'name="entry.XXXXXX"' attributes with the actual entry keys from your Google Form inputs.
+        -->
+        <div id="formContainer" >
+            <form id="myForm" 
+                  action="https://docs.google.com/forms/d/e/1FAIpQLScaO-PIsz5R56ImPnAU8oAX0y3aU1xgZyo3YU3Hf1zNiN9FFA/formResponse" 
+                  method="POST" 
+                  target="hidden_iframe" 
+                  onsubmit="submitted();">
+                <!-- Title Header Card -->
+                <div style="margin-bottom:10px">
+                    <center>
+                        <img src="eleven.png" width="300" height="100" style="margin-top: -30px">
+                    <h1>NEAR EX PROJECT</h1>
+                 <marquee style="font-style:italic;padding-top:10px">*This project was only a prototype develop by: Mark Jake*</marquee>
+                        </center>
+                </div>
+
+                <!-- STORE NAME -->
+                <div class="form-card">
+                    <label class="question-title" for="store_name">STORE DISTRICT-AREA</label>
+                    <input type="text" id="store_name" name="entry.1882208013" placeholder="" required>
+                </div>
+
+                <!-- STORE DISTRICT - AREA -->
+                <div class="form-card">
+                    <label class="question-title" for="store_district">STORE NAME-NUMBER</label>
+                    <input type="text" id="store_district" name="entry.826622581" placeholder="" required>
+                </div>
+
+                <!-- STORE MANAGER -->
+                <div class="form-card">
+                    <label class="question-title" for="store_manager">STORE MANAGER</label>
+                    <input type="text" id="store_manager" name="entry.1836323463" placeholder="" required>
+                </div>
+
+                <!-- STORE CLUSTER -->
+                <div class="form-card">
+                    <label class="question-title" for="store_cluster">STORE CLUSTER</label>
+                    <select id="store_cluster" name="entry.1057083363" placeholder="" required>
+                   <option value="" disabled selected>Choose</option>
+                        <option value="TRANSIT">TRANSIT</option>
+                        <option value="RESIDENTIAL">RESIDENTIAL</option>
+                        <option value="SCHOOL">SCHOOL</option>
+                        <option value="HOSPITAL">HOSPITAL</option>
+                        <option value="TOURIST">TOURIST</option>
+                        <option value="OFFICES">OFFICES</option>
+                    </select>   
+                </div>
+
+                <!-- ITEM CATEGORY (Dropdown) -->
+                <div class="form-card">
+                    <label class="question-title" for="item_category">ITEM CATEGORY</label>
+                    <select id="item_category" name="entry.1579347193" required>
+                        <option value="" disabled selected>Choose</option>
+                        <option value="HABA">HABA</option>
+                        <option value="GROCERY">GROCERY</option>
+                        <option value="CONFECT">CONFECT</option>
+                        <option value="NON FOOD">NON FOOD</option>
+                        <option value="JUICES AND TEAS">JUICES AND TEAS</option>
+                        <option value="NOODLES">NOODLES</option>
+                        <option value="BISCUITS">BISCUITS</option>
+                        <option value="DAIRIES AND YOGURT">WINES AND LIQUORS</option>
+                        <option value="BOTTLED WATER AND ENERGY DRINKS">BOTTLED WATER AND ENERGY DRINKS</option>
+                    </select>
+                </div>
+
+                <!-- ITEM SKU -->
+                <div class="form-card">
+                    <label class="question-title" for="item_sku">ITEM CODE</label>
+                    <input type="number" style="width: 50%;border: none;border-bottom: 1px solid #70757a;padding: 4px 0;font-size: 14px;color: #202124;background: transparent;outline: none;transition: border-bottom 0.2s;" id="item_sku" name="entry.1073271044" placeholder="" required>
+                </div>
+
+                <!-- EXPIRATION DATE -->
+                <div class="form-card">
+                    <label class="question-title" for="expiration_date">EXPIRATION DATE</label>
+                    <input type="date" id="expiration_date" name="entry.1881347893" required>
+                </div>
+
+                <!-- SUGGESTED PROMO (Dropdown) -->
+                <div class="form-card">
+                    <label class="question-title" for="suggested_promo">SUGGESTED PROMO</label>
+                    <select id="suggested_promo" name="entry.2075491493" required>
+                        <option value="" disabled selected>Choose</option>
+                        <option value="BUY 1 TAKE 1">BUY 1 TAKE 1!</option>
+                        <option value="50% OFF">BUY 2 SAVE ****!</option>
+                        <option value="30% OFF">50% OFF!</option>
+                        <option value="BUY 2 SAVE ****">30% OFF!</option>
+                    </select>
+                </div>
+
+                <!-- Submit and Clear Buttons Bar -->
+                <div class="form-footer" style="justify-content:center;">
+                    <button type="submit" class="submit-btn">SUBMIT</button>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- Thank You Message Container -->
+        <div class="thank-you-card" id="thankYouMessage">
+            <center>
+            <h2>Thank You</h2>
+            <p>Your request has been recorded.</p>
+            <button class="reset-btn" onclick="submitAnother()">SUBMIT ANOTHER REQUEST</button>
+            </center>    
+        </div>
+
+    </div>
+
+    <script>
+        let isSubmitted = false;
+
+        function submitted() {
+            // Flag that the user has triggered a submission
+            isSubmitted = true;
+        }
+
+        function showThankYou() {
+            // Hides form and displays the thank you panel when data is posted to Google successfully
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('thankYouMessage').style.display = 'block';
+        }
+
+        function clearForm() {
+            document.getElementById('myForm').reset();
+        }
+
+        function submitAnother() {
+            // Reset state variables and clear the form fields
+            isSubmitted = false;
+            document.getElementById('myForm').reset();
+
+            // Switch views back to form
+            document.getElementById('thankYouMessage').style.display = 'none';
+            document.getElementById('formContainer').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
